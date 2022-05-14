@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+  db:  # Container MySQL
+    image: mysql:5.7  # Image MySQL
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always  # Update project always
+    env_file:  # Setting environment file
+      - ./config/db.env
+  
+  wordpress:  # Container WordPress
+    image: wordpress:latest  # Image WordPress
+    ports:  # Connection Ports
+      - "8000:80"
+    restart: always  # Update project always
+    env_file: # Setting environment file
+      - ./config/wp.env
+    depends_on:  # Setting dependencies
+      - db
+
+volumes:  # Declaring volumes
+  db_data: {}
