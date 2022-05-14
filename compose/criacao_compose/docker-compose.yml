@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  db:  # Container MySQL
+    image: mysql:5.7  # Image MySQL
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always  # Update project always
+    environment:  # Setting environment variables
+      MYSQL_DATABASE: wordpress
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_USER: iuri
+      MYSQL_PASSWORD: secret
+  
+  wordpress:  # Container WordPress
+    image: wordpress:latest  # Image WordPress
+    ports:  # Connection Ports
+      - "8000:80"
+    restart: always  # Update project always
+    environment:  # Setting environment variables
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: iuri
+      WORDPRESS_DB_PASSWORD: secret
+      WORDPRESS_DB_NAME: wordpress
+    depends_on:  # Setting dependencies
+      - db
+
+volumes:  # Declaring volumes
+  db_data: {}
