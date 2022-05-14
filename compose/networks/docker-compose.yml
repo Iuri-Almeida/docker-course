@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+  db:  # Container MySQL
+    image: mysql:5.7  # Image MySQL
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always  # Update project always
+    env_file:  # Setting environment file
+      - ./config/db.env
+    networks:  # Setting which networks to connect to
+      - backend
+  
+  wordpress:  # Container WordPress
+    image: wordpress:latest  # Image WordPress
+    ports:  # Connection Ports
+      - "8000:80"
+    restart: always  # Update project always
+    env_file: # Setting environment file
+      - ./config/wp.env
+    networks:  # Setting which networks to connect to
+      - backend
+    depends_on:  # Setting dependencies
+      - db
+
+volumes:  # Declaring volumes
+  db_data: {}
+
+networks: # Declaring networks
+  backend:
+    driver: bridge
