@@ -1,0 +1,32 @@
+nome: "Iuri"
+idade: 22
+
+objeto:
+  versao: 2.3
+  arquivo: "test.yaml"
+
+versao: 2
+versao_completa: 45.22
+
+string_sem_aspas: Isso é uma string
+string_com_aspas: "Isso também é"
+
+x: ~
+y: null
+
+t: true
+a: On
+f: False
+b: Off
+
+l1: [1, 2, 3, 4]
+l2:
+  - 1
+  - 2
+  - 3
+
+obj1: {a: 1, b: 2, c: 3, d: 4}
+obj2:
+  a: 1
+  b: 2
+  c: 3
